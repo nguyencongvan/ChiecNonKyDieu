@@ -3,7 +3,7 @@
   <head>
     <script src="https://unpkg.com/konva@8.0.2/konva.min.js"></script>
     <meta charset="utf-8" />
-    <title>Konva Wheel of Fortune Demo</title>
+    <title>Chiếc nón kỳ diệu</title>
     <style>
       body {
         margin: 0;
@@ -25,7 +25,7 @@
       var angularVelocities = [];
       var lastRotation = 0;
       var controlled = false;
-      var numWedges = 25;
+      var numWedges = 5;
       var angularFriction = 0.2;
       var target, activeWedge, stage, layer, wheel, pointer;
       var finished = false;
@@ -56,13 +56,16 @@
         return purifyColor([r, g, b]);
       }
 
+      var i = 0
       function getRandomReward() {
-        var mainDigit = Math.round(Math.random() * 9);
-        return 8;
+        var String = ['3 cốc sinh tố', '1 cân xoài', '1 cân cam', '1 cái kẹo', '1 cái kẹo + 1 cái nắm tay haha']
+        
+        return String[i++];
       }
       function addWedge(n) {
         var s = getRandomColor();
         var reward = getRandomReward();
+      
         var r = s[0];
         var g = s[1];
         var b = s[2];
@@ -80,7 +83,7 @@
         });
 
         var wedgeBackground = new Konva.Wedge({
-          radius: 400,
+          radius: 300,
           angle: angle,
           fillRadialGradientStartPoint: 0,
           fillRadialGradientStartRadius: 0,
@@ -98,13 +101,13 @@
         var text = new Konva.Text({
           text: reward,
           fontFamily: 'Calibri',
-          fontSize: 50,
+          fontSize: 20,
           fill: 'white',
           align: 'center',
           stroke: 'yellow',
           strokeWidth: 1,
           rotation: (Math.PI + angle) / 2,
-          x: 380,
+          x: 200,
           y: 30,
           listening: false,
         });
@@ -137,14 +140,14 @@
             ((wheel.rotation() - lastRotation) * 1000) / frame.timeDiff
           );
         } else {
-          var diff = (frame.timeDiff * angularVelocity) / 1000;
+          var diff = (frame.timeDiff * angularVelocity) / 100;
           if (diff > 0.0001) {
             wheel.rotate(diff);
           } else if (!finished && !controlled) {
             if (shape) {
               var text = shape.getParent().findOne('Text').text();
               var price = text.split('\n').join('');
-              alert('You price is ' + price);
+              alert('Phần thưởng của em là: ' + price);
             }
             finished = true;
           }
@@ -179,7 +182,7 @@
         layer = new Konva.Layer();
         wheel = new Konva.Group({
           x: stage.width() / 2,
-          y: 410,
+          y: 320,
         });
 
         for (var n = 0; n < numWedges; n++) {
