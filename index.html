@@ -222,41 +222,41 @@
           finished = false;
         });
         // add listeners to container
-        stage.addEventListener(
-          'mouseup touchend',
-          function () {
-            controlled = false;
-            angularVelocity = getAverageAngularVelocity() * 5;
+        // stage.addEventListener(
+        //   'mouseup touchend',
+        //   function () {
+        //     controlled = false;
+        //     angularVelocity = getAverageAngularVelocity() * 5;
 
-            if (angularVelocity > 20) {
-              angularVelocity = 20;
-            } else if (angularVelocity < -20) {
-              angularVelocity = -20;
-            }
+        //     if (angularVelocity > 20) {
+        //       angularVelocity = 20;
+        //     } else if (angularVelocity < -20) {
+        //       angularVelocity = -20;
+        //     }
 
-            angularVelocities = [];
-          },
-          false
-        );
+        //     angularVelocities = [];
+        //   },
+        //   false
+        // );
 
-        stage.addEventListener(
-          'mousemove touchmove',
-          function (evt) {
-            var mousePos = stage.getPointerPosition();
-            if (controlled && mousePos && target) {
-              var x = mousePos.x - wheel.getX();
-              var y = mousePos.y - wheel.getY();
-              var atan = Math.atan(y / x);
-              var rotation = x >= 0 ? atan : atan + Math.PI;
-              var targetGroup = target.getParent();
+        // stage.addEventListener(
+        //   'mousemove touchmove',
+        //   function (evt) {
+        //     var mousePos = stage.getPointerPosition();
+        //     if (controlled && mousePos && target) {
+        //       var x = mousePos.x - wheel.getX();
+        //       var y = mousePos.y - wheel.getY();
+        //       var atan = Math.atan(y / x);
+        //       var rotation = x >= 0 ? atan : atan + Math.PI;
+        //       var targetGroup = target.getParent();
 
-              wheel.rotation(
-                rotation - targetGroup.startRotation - target.angle() / 2
-              );
-            }
-          },
-          false
-        );
+        //       wheel.rotation(
+        //         rotation - targetGroup.startRotation - target.angle() / 2
+        //       );
+        //     }
+        //   },
+        //   false
+        // );
 
         var anim = new Konva.Animation(animate, layer);
 
