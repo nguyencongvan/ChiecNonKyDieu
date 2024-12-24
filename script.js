@@ -38,7 +38,7 @@ function drawImageProp(ctx, img, dx, dy, dWidth, dHeight) {
     let imgWidth = img.naturalWidth;
     let imgHeight = img.naturalHeight;
     let offsetX = (dWidth - imgWidth) * 0.5;
-    let offsetY = (dHeight - imgHeight) * 0.5;
+    let offsetY = (dHeight - imgHeight) * 0.4;
     ctx.drawImage(img, offsetX, offsetY, imgWidth, imgHeight);
 }
 
@@ -50,8 +50,8 @@ var init = function () {
     // Thiết lập canvas
     var canvas = document.getElementById('heart');
     var ctx = canvas.getContext('2d');
-    var width = canvas.width = 500;
-    var height = canvas.height = 500;
+    var width = canvas.width = 2000;
+    var height = canvas.height = 1200;
     var rand = Math.random;
 
     // Canvas cho background
