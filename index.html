@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Heart Animation Effect</title>
-
+    <title>Heart Animation Effect with Music</title>
     <style>
         body {
             display: flex;
@@ -14,8 +13,8 @@
             background: #f0f0f0;
         }
         .container {
-            width: 500px;  /* Điều chỉnh kích thước để phù hợp với canvas */
-            height: 500px;
+            width: 300px;
+            height: 300px;
             position: relative;
             background: white;
             border-radius: 10px;
@@ -29,14 +28,66 @@
             width: 100%;
             height: 100%;
         }
+        #musicControls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .control-btn {
+            background: #ff69b4;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .control-btn:hover {
+            background: #ff1493;
+        }
     </style>
-	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
   </head>
   
   <body>  
-        <canvas id="heart"></canvas>
+    <canvas id="heart"></canvas>
+    <div id="musicControls">
+        <button class="control-btn" onclick="toggleMusic()">Play Music</button>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+    </div>
+    <audio id="bgMusic" loop>
+        <source src="only love.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script src="script.js"></script>
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const volumeSlider = document.getElementById('volumeSlider');
+        let isPlaying = false;
 
-        <!--JavaScript-->
-        <script src="script.js"></script>
+        function toggleMusic() {
+            const btn = document.querySelector('.control-btn');
+            if (isPlaying) {
+                audio.pause();
+                btn.textContent = 'Play Music';
+            } else {
+                audio.play();
+                btn.textContent = 'Pause Music';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+    </script>
   </body>
 </html>
